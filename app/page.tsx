@@ -62,11 +62,11 @@ export default async function Home() {
     <main className="bg-secondary text-primary flex min-h-screen flex-col items-center justify-between p-24">
       
       <div className="relative flex place-items-center">
-      <h1 className={`mb-3 text-8xl font-semibold`}>US Houses!</h1>
+      <h1 className={`mb-3 lg:text-8xl text-4xl font-semibold text-center`}>US Houses!</h1>
       </div>
 
       <div className="grid grid-col grid-cols-1 text-center">
-        <div className="shadow-2xl mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-64 lg:grid-cols-2 lg:text-left">
+        <div className="shadow-2xl mb-32 grid text-center w-full lg:max-w-5xl lg:w-full lg:mb-64 lg:grid-cols-2 lg:text-left">
 
           <a href="#houses">
           <div className="outline m-6 shadow-[0_0_20px_5px_#d41c46] hover:shadow-[0_0_30px_10px_#d41c46] h-48 w-48 grid-cols-1 text-center">
@@ -125,7 +125,8 @@ export default async function Home() {
         </div>
       </div>
 
-
+      
+      <div className="h-96 w-96">
       <div id="houses">
           <Bar
             data={{
@@ -149,9 +150,10 @@ export default async function Home() {
           
           />
         </div>
+        </div>
 
 
-      <p className="mt-20 pt-10 mb-0 font-white">This page was built by Ryan James.</p>
+      <p className="lg:mt-20 pt-20 mb-0 font-white">This page was built by Ryan James.</p>
     </main>
   )
 }
