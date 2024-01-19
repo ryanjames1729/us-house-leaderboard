@@ -1,7 +1,6 @@
-import Image from 'next/image'
-
 'use client'
 
+import Image from 'next/image'
 import { GraphQLClient } from 'graphql-request'
 
 import { Bar } from 'react-chartjs-2'
@@ -70,43 +69,58 @@ export default async function Home() {
         <div className="shadow-2xl mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-64 lg:grid-cols-2 lg:text-left">
 
           <a href="#houses">
-          <div className="outline m-6 shadow-[0_0_20px_5px_#d41c46] hover:shadow-[0_0_30px_10px_#d41c46] h-24 grid-cols-1 text-center">
-            <h2 className="mb-3 text-4xl font-semibold py-6">
+          <div className="outline m-6 shadow-[0_0_20px_5px_#d41c46] hover:shadow-[0_0_30px_10px_#d41c46] h-48 w-48 grid-cols-1 text-center">
+            <div className="relative grid-cols-1 text-center h-48 w-48">
+            <Image src="/PinesGRN.svg" alt="US House 1" fill={true} className="object-cover"/>
+            </div>
+            {/* <h2 className="mb-3 text-4xl font-semibold py-6">
               {houseName1}{' '}
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                 -&gt;
               </span>
-            </h2>
+            </h2> */}
             </div></a>
 
             <a href="#houses">
-            <div className="outline m-6 shadow-[0_0_20px_5px_#d41c46] hover:shadow-[0_0_30px_10px_#d41c46] h-24 grid-cols-1 text-center">
-            <h2 className="mb-3 text-4xl font-semibold py-6">
+            <div className="outline m-6 shadow-[0_0_20px_5px_#d41c46] hover:shadow-[0_0_30px_10px_#d41c46] h-48 w-48 grid-cols-1 text-center">
+            <div className="relative grid-cols-1 text-center h-48 w-48">
+              <Image src="/CardinalRED.svg" alt="US House 2" fill={true} className="object-cover" />
+            </div>
+            
+            {/* <h2 className="mb-3 text-4xl font-semibold py-6">
               {houseName2}{' '}
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                 -&gt;
               </span>
-            </h2>
+            </h2> */}
             </div></a>
 
             <a href="#houses">
-            <div className="outline m-6 shadow-[0_0_20px_5px_#d41c46] hover:shadow-[0_0_30px_10px_#d41c46] h-24 grid-cols-1 text-center">
-            <h2 className="mb-3 text-4xl font-semibold py-6">
+            <div className="outline m-6 shadow-[0_0_20px_5px_#d41c46] hover:shadow-[0_0_30px_10px_#d41c46] h-48 w-48 grid-cols-1 text-center">
+            <div className="relative grid-cols-1 text-center h-48 w-48">
+              <Image src="/BellBLUE.svg" alt="US House 3" fill={true} className="object-cover" />
+            </div>
+           
+            {/* <h2 className="mb-3 text-4xl font-semibold py-6">
               {houseName3}{' '}
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                 -&gt;
               </span>
-            </h2>
+            </h2> */}
             </div></a>
 
             <a href="#houses">
-            <div className="outline m-6 shadow-[0_0_20px_5px_#d41c46] hover:shadow-[0_0_30px_10px_#d41c46] h-24 grid-cols-1 text-center">
-            <h2 className="mb-3 text-4xl font-semibold py-6">
+            <div className="outline m-6 shadow-[0_0_20px_5px_#d41c46] hover:shadow-[0_0_30px_10px_#d41c46] h-48 w-48 grid-cols-1 text-center">
+            <div className="relative grid-cols-1 text-center h-48 w-48">
+              <Image src="/HighlanderCOLOR.svg" alt="US House 4" fill={true} className="object-cover" />
+            </div>
+           
+            {/* <h2 className="mb-3 text-4xl font-semibold py-6">
               {houseName4}{' '}
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                 -&gt;
               </span>
-            </h2>
+            </h2> */}
             </div></a>
         </div>
       </div>
