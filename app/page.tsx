@@ -14,10 +14,10 @@ async function getHouses() {
   const GRAPHCMS_URL_ENDPOINT = 'https://api-us-east-1-shared-usea1-02.hygraph.com/v2/clrjkusf007bv01vx43bnq4kz/master'
   const graphcms = new GraphQLClient(GRAPHCMS_URL_ENDPOINT)
 
-  const { houses }: { houses: Array<{ houseName: string, housePoints: number }> } = await graphcms.request(
+  const { houseEntries }: { houseEntries: Array<{ houseName: string, housePoints: number }> } = await graphcms.request(
     `
-    {
-      houses {
+    query HouseEntries {
+      houseEntries {
         houseName
         housePoints
       }
@@ -25,23 +25,45 @@ async function getHouses() {
     `
   )
 
-  return houses
+  // console.log('async function getHouses()')
+  // console.log(houseEntries)
+ 
+
+  return houseEntries
 }
 
+// article to help: https://medium.com/@harshil25patel/how-to-use-next-js-14-app-router-fetching-data-with-an-async-function-and-utilizing-react-hooks-ac02b71124cb
 
-export default function Home({ houses }: { houses: Array<{ houseName: string, housePoints: number }> }) {
+
+export default async function Home() {
   // const houses: Array<string> = getHouses();
 
+  const houseData: Array<{ houseName: string, housePoints: number }> = await getHouses();
+  //const houseData = houses;
+  // console.log("house data")
+  // console.log(houseData);
+  console.log(houseData[0].houseName);
+  console.log(houseData[0].housePoints);
 
-  const houseData = houses;
-  console.log("house data")
-  console.log(houseData);
+  const houseName1 = houseData[0].houseName.replace(/\s/g, '');
+  const housePoints1 = houseData[0].housePoints;
+  const houseName2 = houseData[1].houseName;
+  const housePoints2 = houseData[1].housePoints;
+  const houseName3 = houseData[2].houseName;
+  const housePoints3 = houseData[2].housePoints;
+  const houseName4 = houseData[3].houseName;
+  const housePoints4 = houseData[3].housePoints;
+
+  houseData.map((house) => {
+    console.log(house.houseName);
+    console.log(house.housePoints);
+  })
   
   return (
     <main className="bg-secondary text-primary flex min-h-screen flex-col items-center justify-between p-24">
       
       <div className="relative flex place-items-center">
-      <h1 className={`mb-3 text-6xl font-semibold`}>US Houses!</h1>
+      <h1 className={`mb-3 text-8xl font-semibold`}>US Houses!</h1>
       </div>
 
       <div className="grid grid-col grid-cols-1 text-center">
@@ -50,7 +72,7 @@ export default function Home({ houses }: { houses: Array<{ houseName: string, ho
           <a href="#houses">
           <div className="outline m-6 shadow-[0_0_20px_5px_#d41c46] hover:shadow-[0_0_30px_10px_#d41c46] h-24 grid-cols-1 text-center">
             <h2 className="mb-3 text-4xl font-semibold py-6">
-              Pine{' '}
+              {houseName1}{' '}
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                 -&gt;
               </span>
@@ -60,7 +82,7 @@ export default function Home({ houses }: { houses: Array<{ houseName: string, ho
             <a href="#houses">
             <div className="outline m-6 shadow-[0_0_20px_5px_#d41c46] hover:shadow-[0_0_30px_10px_#d41c46] h-24 grid-cols-1 text-center">
             <h2 className="mb-3 text-4xl font-semibold py-6">
-              Cardinal{' '}
+              {houseName2}{' '}
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                 -&gt;
               </span>
@@ -70,7 +92,7 @@ export default function Home({ houses }: { houses: Array<{ houseName: string, ho
             <a href="#houses">
             <div className="outline m-6 shadow-[0_0_20px_5px_#d41c46] hover:shadow-[0_0_30px_10px_#d41c46] h-24 grid-cols-1 text-center">
             <h2 className="mb-3 text-4xl font-semibold py-6">
-              Bell{' '}
+              {houseName3}{' '}
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                 -&gt;
               </span>
@@ -80,7 +102,7 @@ export default function Home({ houses }: { houses: Array<{ houseName: string, ho
             <a href="#houses">
             <div className="outline m-6 shadow-[0_0_20px_5px_#d41c46] hover:shadow-[0_0_30px_10px_#d41c46] h-24 grid-cols-1 text-center">
             <h2 className="mb-3 text-4xl font-semibold py-6">
-              Highlander{' '}
+              {houseName4}{' '}
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                 -&gt;
               </span>
@@ -93,19 +115,19 @@ export default function Home({ houses }: { houses: Array<{ houseName: string, ho
       <div id="houses">
           <Bar
             data={{
-              labels: ["Pine", "Cardinal", "Bell", "Highlander"],
+              labels: [houseName1, houseName2, houseName3, houseName4],
               datasets: [
                 {
                   label: "US House Points",
-                  data: [150, 120, 60, 70],
+                  data: [housePoints1, housePoints2, housePoints3, housePoints4],
                   backgroundColor: ["rgba(0,255,0,0.3)", "rgba(255,0,0,0.3)", "rgba(0,0,255,0.3)", "rgba(0,0,0,0.3)"],
                   borderColor: "red",
                   borderWidth: 2,
                 },
               ]
             }}
-            height={300}
-            width={500}
+            height={450}
+            width={750}
             options={{
               maintainAspectRatio: false,
               responsive: true,
