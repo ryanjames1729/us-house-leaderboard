@@ -120,7 +120,7 @@ export default async function Home() {
                 {
                   label: "US House Points",
                   data: [housePoints1, housePoints2, housePoints3, housePoints4],
-                  backgroundColor: ["rgba(0,255,0,0.3)", "rgba(255,0,0,0.3)", "rgba(0,0,255,0.3)", "rgba(0,0,0,0.3)"],
+                  backgroundColor: ["rgba(0,255,0,0.3)", "rgba(255,0,0,0.3)", "rgba(0,0,75,0.3)", "rgba(100,100,200,0.3)"],
                   borderColor: "red",
                   borderWidth: 2,
                 },
