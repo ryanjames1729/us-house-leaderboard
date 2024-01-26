@@ -16,7 +16,10 @@ const config: Config = {
       colors: {
         primary: "#d41c46",
         secondary: "#194173",
-      }
+      },
+      fontFamily: {
+        primary: ['"baskerville-display-pt", Georgia, serif;'],
+      },
     },
   },
   plugins: [],
