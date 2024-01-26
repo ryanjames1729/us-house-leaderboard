@@ -44,8 +44,8 @@ export default async function Home() {
   //const houseData = houses;
   // console.log("house data")
   // console.log(houseData);
-  console.log(houseData[0].houseName);
-  console.log(houseData[0].housePoints);
+  // console.log(houseData[0].houseName);
+  // console.log(houseData[0].housePoints);
 
   const houseName1 = houseData[0].houseName.replace(/\s/g, '');
   const housePoints1 = houseData[0].housePoints;
