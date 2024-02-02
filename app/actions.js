@@ -1,7 +1,7 @@
 'use server'
 
 import Image from 'next/image'
-import { GraphQLClient } from 'graphql-request'
+import { gql, GraphQLClient } from 'graphql-request'
 
 async function getHouses() {
     const GRAPHCMS_URL_ENDPOINT = 'https://api-us-east-1-shared-usea1-02.hygraph.com/v2/clrjkusf007bv01vx43bnq4kz/master'
@@ -36,17 +36,84 @@ export async function updatePoints(formData) {
 
     const houseEntries = await getHouses()
     const houseNames = houseEntries.map(entry => entry.houseName)
-    const housePoints = houseEntries.map(entry => entry.housePoints)
+    const housePointsList = houseEntries.map(entry => entry.housePoints)
     
     console.log('houseNames:', houseNames)
-    console.log('housePoints:', housePoints)
+    console.log('housePoints:', housePointsList)
 
-    housePoints[0] += parseFloat(dataObject['pinesPointsAdded']);
-    housePoints[1] += parseFloat(dataObject['cardinalPointsAdded']);
-    housePoints[2] += parseFloat(dataObject['bellPointsAdded']);
-    housePoints[3] += parseFloat(dataObject['highlanderPointsAdded']);
+    housePointsList[0] += parseFloat(dataObject['pinesPointsAdded']);
+    housePointsList[1] += parseFloat(dataObject['cardinalPointsAdded']);
+    housePointsList[2] += parseFloat(dataObject['bellPointsAdded']);
+    housePointsList[3] += parseFloat(dataObject['highlanderPointsAdded']);
 
-    console.log('housePoints:', housePoints)
+    console.log('housePoints:', housePointsList)
+
+    const bellPoints = housePointsList[2];
+    const cardinalPoints = housePointsList[1];
+    const pinesPoints = housePointsList[0];
+    const highlanderPoints = housePointsList[3];
+
+   
+    const graphqlAPI = process.env.GRAPHCMS_URL_ENDPOINT;
+    const graphqlToken = process.env.HYGRAPH_TOKEN;
+
+    // need to update the following to match the correct mutation
+
+    const graphQLClient = new GraphQLClient(graphqlAPI, {
+        headers: {
+          authorization: `Bearer ${graphqlToken}`,
+        }
+      });
+    
+    const query = gql`
+    mutation($bellPoints: Float!, $cardinalPoints: Float!, $pinesPoints: Float!, $highlanderPoints: Float!) {
+    updateHouseEntry (
+        data: {houseName: "Bell", housePoints: $bellPoints}
+        where: {houseName: "Bell"}
+    ) {
+        id
+    }
+    updateHouseEntry (
+        data: {houseName: "Cardinal", housePoints: $cardinalPoints}
+        where: {houseName: "Cardinal"}
+    ) {
+        id
+    }
+    updateHouseEntry (
+        data: {houseName: "Highlander", housePoints: $highlanderPoints}
+        where: {houseName: "Highlander"}
+    ) {
+        id
+    }
+    updateHouseEntry (
+        data: {houseName: "Pines", housePoints: $pinesPoints}
+        where: {houseName: "Pines"}
+    ) {
+        id
+    }
+    publishHouseEntry(where: {houseName: "Bell"}) {
+        id
+    }
+    publishHouseEntry(where: {houseName: "Cardinal"}) {
+        id
+    }
+    publishHouseEntry(where: {houseName: "Highlander"}) {
+        id
+    }
+    publishHouseEntry(where: {houseName: "Pines"}) {
+        id
+    }
+    }
+`
+
+    
+    try{
+        const result = await graphQLClient.request(query, {bellPoints, cardinalPoints, pinesPoints, highlanderPoints});
+        
+      } catch (error) {
+        console.log('error 500: ' + error);
+        
+      }
 
 
     return {
