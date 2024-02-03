@@ -1,11 +1,13 @@
-'use client'
+'use server'
 import React, { useRef, useState } from 'react'
 import Image from 'next/image'
 import { GraphQLClient } from 'graphql-request'
-import { UserButton } from '@clerk/nextjs'
-import { User } from '@clerk/nextjs/server'
 import Form from '../../components/Form/index'
-import { Protect } from "@clerk/nextjs";
+
+//import { auth, User } from "@clerk/nextjs/server";
+import { useOrganization, useUser, Protect, ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton, SignOutButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs";
+
 
 async function getHouses() {
   const GRAPHCMS_URL_ENDPOINT = 'https://api-us-east-1-shared-usea1-02.hygraph.com/v2/clrjkusf007bv01vx43bnq4kz/master'
@@ -30,6 +32,8 @@ async function getHouses() {
 }
 
 // article to help: https://medium.com/@harshil25patel/how-to-use-next-js-14-app-router-fetching-data-with-an-async-function-and-utilizing-react-hooks-ac02b71124cb
+
+
 
 
 export default async function Home() {
@@ -57,8 +61,13 @@ export default async function Home() {
 //   })
 
   
-
+    // const { has } = auth();
+    // console.log(has({permission:"org:admin"}));
+    // const { isLoaded, isSignedIn, user } = useUser()
+    // console.log(user);
   
+    const { userId } = auth();
+    const adminList = ["user_2boczKCwgzGcJGOXFkJGhPVA47T"]
   
   return (
     
@@ -67,13 +76,22 @@ export default async function Home() {
       <h1 className={`mb-3 lg:text-6xl text-2xl text-center text-slate-500`}>Upper School House Leaderboard</h1>
       <h2 className={`mb-3 lg:text-8xl text-4xl font-semibold text-center`}>ADMIN WINDOW</h2>
       <div className="h-screen">
-        <UserButton afterSignOutUrl="/"/> Click My Icon to Sign Out
-        <Protect
+        <div className="m-auto flex place-items-center flex-col pb-2">
+        <SignedIn>
+        <UserButton afterSignOutUrl="/"/> 
+        <p>{userId}</p>
+        <SignOutButton />
+        </SignedIn>
+        
+        </div>
+        {/* <Protect
     role="org:admin"
     fallback={<p>You do not have the permissions to add points.</p>}
     >
         <Form />
-        </Protect>
+        </Protect> */}
+        {adminList.includes(userId) ? <Form /> : <p>You do not have the permissions to add points.</p>}
+        
       </div>
       </div>
 
