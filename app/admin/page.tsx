@@ -65,7 +65,7 @@ export default async function Home() {
     // console.log(has({permission:"org:admin"}));
     // const { isLoaded, isSignedIn, user } = useUser()
     // console.log(user);
-  
+
     const { userId } = auth();
     const adminList = ["user_2boczKCwgzGcJGOXFkJGhPVA47T"]
   
@@ -85,12 +85,12 @@ export default async function Home() {
         
         </div>
         {/* <Protect
-    role="org:admin"
+    role="org:admin
     fallback={<p>You do not have the permissions to add points.</p>}
     >
         <Form />
         </Protect> */}
-        {adminList.includes(userId) ? <Form /> : <p>You do not have the permissions to add points.</p>}
+        {adminList.includes(userId ? userId : "") ? <Form /> : <p>You do not have the permissions to add points.</p>}
         
       </div>
       </div>
