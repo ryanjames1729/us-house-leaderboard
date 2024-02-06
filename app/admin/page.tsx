@@ -91,6 +91,7 @@ export default async function Home() {
         <Form />
         </Protect> */}
         {adminList.includes(userId ? userId : "") ? <Form /> : <p>You do not have the permissions to add points.</p>}
+       
         
       </div>
       </div>
