@@ -67,7 +67,7 @@ export default async function Home() {
     // console.log(user);
 
     const { userId } = auth();
-    const adminList = ["user_2boczKCwgzGcJGOXFkJGhPVA47T"]
+    const adminList = ["user_2boczKCwgzGcJGOXFkJGhPVA47T", "user_2c045zTI8BY4R54lWFRvBGjvbRE"]
   
   return (
     
