@@ -2,6 +2,8 @@
 
 import Image from 'next/image'
 import { gql, GraphQLClient } from 'graphql-request'
+import { redirect } from 'next/dist/server/api-utils'
+import { Alert } from 'react-alert'
 
 async function getHouses() {
     const GRAPHCMS_URL_ENDPOINT = 'https://api-us-east-1-shared-usea1-02.hygraph.com/v2/clrjkusf007bv01vx43bnq4kz/master'
@@ -26,6 +28,8 @@ async function getHouses() {
   }
 
 export async function updatePoints(formData) {
+    
+
     console.log('updatePoints action called with:', formData);
 
     const data = JSON.stringify(Object.fromEntries(formData));
@@ -41,10 +45,10 @@ export async function updatePoints(formData) {
     console.log('houseNames:', houseNames)
     console.log('housePoints:', housePointsList)
 
-    housePointsList[0] += parseFloat(dataObject['pinesPointsAdded']);
-    housePointsList[1] += parseFloat(dataObject['cardinalPointsAdded']);
-    housePointsList[2] += parseFloat(dataObject['bellPointsAdded']);
-    housePointsList[3] += parseFloat(dataObject['highlanderPointsAdded']);
+    housePointsList[0] += parseFloat(dataObject['pinesPointsAdded']? dataObject['pinesPointsAdded'] : 0);
+    housePointsList[1] += parseFloat(dataObject['cardinalPointsAdded']? dataObject['cardinalPointsAdded'] : 0);
+    housePointsList[2] += parseFloat(dataObject['bellPointsAdded']? dataObject['bellPointsAdded'] : 0);
+    housePointsList[3] += parseFloat(dataObject['highlanderPointsAdded']? dataObject['highlanderPointsAdded'] : 0);
 
     console.log('housePoints:', housePointsList)
 
@@ -109,11 +113,17 @@ export async function updatePoints(formData) {
     
     try{
         const result = await graphQLClient.request(query, {bellPoints, cardinalPoints, pinesPoints, highlanderPoints});
-        
+        // redirect user to "/" after mutation
+        console.log('result:', result);
+        Alert.success('Points updated successfully');
+
+
+
       } catch (error) {
         console.log('error 500: ' + error);
         
       }
+    
 
 
     return {
