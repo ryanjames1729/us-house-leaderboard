@@ -79,7 +79,7 @@ export default async function Home() {
         <div className="m-auto flex place-items-center flex-col pb-2">
         <SignedIn>
         <UserButton afterSignOutUrl="/"/> 
-        <p>{userId}</p>
+        {/* <p>{userId}</p> */}
         <SignOutButton />
         </SignedIn>
         
