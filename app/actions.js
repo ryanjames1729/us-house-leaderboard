@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { gql, GraphQLClient } from 'graphql-request'
 import { redirect } from 'next/dist/server/api-utils'
-import { Alert } from 'react-alert'
+import { Alert } from 'flowbite-react'
 
 async function getHouses() {
     const GRAPHCMS_URL_ENDPOINT = 'https://api-us-east-1-shared-usea1-02.hygraph.com/v2/clrjkusf007bv01vx43bnq4kz/master'
@@ -115,7 +115,7 @@ export async function updatePoints(formData) {
         const result = await graphQLClient.request(query, {bellPoints, cardinalPoints, pinesPoints, highlanderPoints});
         // redirect user to "/" after mutation
         console.log('result:', result);
-        Alert.success('Points updated successfully');
+        
 
 
 
