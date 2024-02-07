@@ -2,8 +2,9 @@
 
 import Image from 'next/image'
 import { gql, GraphQLClient } from 'graphql-request'
-import { redirect } from 'next/dist/server/api-utils'
+//import { redirect } from 'next/dist/server/api-utils'
 import { Alert } from 'flowbite-react'
+import { redirect } from 'next/navigation';
 
 async function getHouses() {
     const GRAPHCMS_URL_ENDPOINT = 'https://api-us-east-1-shared-usea1-02.hygraph.com/v2/clrjkusf007bv01vx43bnq4kz/master'
@@ -116,12 +117,11 @@ export async function updatePoints(formData) {
         // redirect user to "/" after mutation
         console.log('result:', result);
         
-
-
-
       } catch (error) {
         console.log('error 500: ' + error);
         
+      } finally {
+        redirect('/');
       }
     
 
